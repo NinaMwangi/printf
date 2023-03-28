@@ -8,50 +8,36 @@
  * Return: numb of chars printed to std output*
  */
 
-int _printf(const char *format, ...);
-
-int _putchar(char c);
-
-int main(void)
-{
-	printf("%d\n", _printf("I am a %s", "boy"));
-
-	return (0);
-}
-
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
 int _printf(const char *format, ...)
 {
         va_list list;
-        int count = 0;
+        int count;
         char *pH;
+        char ch;
 
+        count = 0;
         va_start(list, format);
 
         while (*format != '\0')
         {
                 if (*format == '%')
                 {
-			format++;
+                        format++;
 
                         if (*format == 'c')
                         {
-                                _putchar(va_arg(list, int));
+                                ch = va_arg(list, int);
+                                write(1, &ch, 1);
                                 count++;
                                 format++;
                         }
-                        else
-                        if (*format == 's')
+                        else if (*format == 's')
                         {
                                 pH = va_arg(list, char *);
 
                                 while (*pH != '\0')
                                 {
-                                        _putchar(*pH);
+                                        write(1, &(*pH), 1);
                                         pH++;
                                         count++;
                                 }
@@ -59,21 +45,26 @@ int _printf(const char *format, ...)
                         }
                         else if (*format == '%')
                         {
-                                _putchar('%');
+                                ch = '%';
+                                write(1, &ch, 1);
                                 format++;
                                 count++;
                         }
-			else
-			{
-				format++;
-			}
+                        else
+                        {
+                                format++;
+                        }
                 }
-
-                _putchar(*format);
-                format++;
-                count++;
+                else
+                {
+                        write(1, &(*format), 1);
+                        format++;
+                        count++;
+                }
         }
 
         va_end(list);
+        ch = '\n';
+        write(1, &ch, 1);
         return (count);
 }

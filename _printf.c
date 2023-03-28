@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
-
+#include <unistd.h>
 
 /**
  * _printf - produces output according to a format
@@ -14,6 +14,7 @@ int _printf(const char *format, ...)
 	va_list list;
 	int count;
 	char *pH;
+	char ch;
 
 	count = 0;
 	va_start(list, format);
@@ -26,7 +27,8 @@ int _printf(const char *format, ...)
 
 			if (*format == 'c')
 			{
-				_putchar(va_arg(list, int));
+				ch = va_arg(list, int);
+				write(1, &ch, 1);
 				count++;
 				format++;
 			}
@@ -36,7 +38,7 @@ int _printf(const char *format, ...)
 
 				while (*pH != '\0')
 				{
-					_putchar(*pH);
+					write(1, &(*pH), 1);
 					pH++;
 					count++;
 				}
@@ -44,7 +46,8 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == '%')
 			{
-				_putchar('%');
+				ch = '%';
+				write(1, &ch, 1);
 				format++;
 				count++;
 			}
@@ -55,12 +58,14 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(*format);
+			write(1, &(*format), 1);
 			format++;
 			count++;
 		}
 	}
 
 	va_end(list);
+	ch = '\n';
+	write(1, &ch, 1);
 	return (count);
 }
