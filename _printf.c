@@ -15,8 +15,6 @@ int _printf(const char *format, ...)
 	int count = 0;
 	char *pH;
 
-	if (format =! NULL)
-	{
 	va_start(list, format);
 
 	while (*format != '\0')
@@ -56,6 +54,5 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(list);
-	}
 	return (count);
 }
