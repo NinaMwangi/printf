@@ -27,8 +27,7 @@ int _printf(const char *format, ...)
 				count++;
 				format += 2;
 			}
-			else
-			if (*(format + 1) == 's')
+			else if (*(format + 1) == 's')
 			{
 				pH = va_arg(list, char *);
 
@@ -43,14 +42,17 @@ int _printf(const char *format, ...)
 			else if (*(format + 1) == '%')
 			{
 				_putchar('%');
-				format += 2;
+				format ++;
 				count++;
 			}
 		}
 
-		_putchar(*format);
-		format++;
-		count++;
+		else
+		{
+			_putchar(*format);
+			format++;
+			count++;
+		}
 	}
 
 	va_end(list);
