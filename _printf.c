@@ -65,7 +65,7 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(list);
-	ch = '\n';
-	write(1, &ch, 1);
+	/*ch = '\n';
+	write(1, &ch, 1);*/
 	return (count);
 }
