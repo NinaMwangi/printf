@@ -11,48 +11,48 @@
 
 int _printf(const char *format, ...)
 {
-        va_list list;
-        int count = 0;
-        char *pH;
+	va_list list;
+	int count = 0;
+	char *pH;
 
-        va_start(list, format);
+	va_start(list, format);
 
-        while (*format != '\0')
-        {
-                if (*format == '%')
-                {
-                        if (*(format + 1) == 'c')
-                        {
-                                _putchar(va_arg(list, int));
-                                count++;
-                                format += 2;
-                        }
-                        else
-                        if (*(format + 1) == 's')
-                        {
-                                pH = va_arg(list, char *);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			if (*(format + 1) == 'c')
+			{
+				_putchar(va_arg(list, int));
+				count++;
+				format += 2;
+			}
+			else
+			if (*(format + 1) == 's')
+			{
+				pH = va_arg(list, char *);
 
-                                while (*pH != '\0')
-                                {
-                                        _putchar(*pH);
-                                        pH++;
-                                        count++;
-                                }
-                                format += 2;
-                        }
-                        else if (*(format + 1) == '%')
-                        {
-                                _putchar('%');
-                                format += 2;
-                                count++;
-                        }
-                }
+				while (*pH != '\0')
+				{
+					_putchar(*pH);
+					pH++;
+					count++;
+				}
+				format += 2;
+			}
+			else if (*(format + 1) == '%')
+			{
+				_putchar('%');
+				format += 2;
+				count++;
+			}
+		}
 
-                _putchar(*format);
-                format++;
-                count++;
-        }
+		_putchar(*format);
+		format++;
+		count++;
+	}
 
-        va_end(list);
-        return (count);
+	va_end(list);
+	return (count);
 }
