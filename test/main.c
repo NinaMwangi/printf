@@ -40,7 +40,9 @@ int main(void)
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
-    _printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
+    /*_printf("%s", "This sentence is retrieved from va_args!\n");*/
+    printf("%s", "This sentence is retrieved from va_args!\n");
+    printf("%d", _printf("%s", "This sentence is retrieved from va_args!\n"));
     _printf(NULL);
     _printf("%");
     return (0);

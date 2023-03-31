@@ -58,6 +58,8 @@ int _printf(const char *format, ...)
                                         pH++;
                                         count++;
 					}
+
+					format++;
                                 }
 			}
 			else if (*format == '%')
