@@ -42,24 +42,23 @@ int _printf(const char *format, ...)
 				pH = va_arg(list, char *);
 
 				if (pH == NULL)
-				{
-					while (*nullp != '\0')
+                                {
+                                        while (*nullp != '\0')
+                                        {
+                                                write(1, &(*nullp), 1);
+                                                nullp++;
+                                                count++;
+                                        }
+                                }
+                                else
+                                {
+                                        while (*pH != '\0')
 					{
-						write(1, &(*nullp), 1);
-						nullp++;
-						count++;
+                                        write(1, &(*pH), 1);
+                                        pH++;
+                                        count++;
 					}
-				}
-				else
-				{
-					while (*pH != '\0')
-				{
-					write(1, &(*pH), 1);
-					pH++;
-					count++;
-				}
-				}
-				format++;
+                                }
 			}
 			else if (*format == '%')
 			{
