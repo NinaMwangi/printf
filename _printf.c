@@ -13,14 +13,19 @@ int _printf(const char *format, ...)
 {
 	va_list list;
 	int count;
-	char *pH;
+	char *pH, *nullp;
 	char ch;
 
+	nullp = "(null)";
 	count = 0;
 	va_start(list, format);
 
+	if (format == NULL)
+		return (0);
+
 	while (*format != '\0')
 	{
+
 		if (*format == '%')
 		{
 			format++;
@@ -36,13 +41,24 @@ int _printf(const char *format, ...)
 			{
 				pH = va_arg(list, char *);
 
-				while (*pH != '\0')
-				{
-					write(1, &(*pH), 1);
-					pH++;
-					count++;
-				}
-				format++;
+				if (pH == NULL)
+                                {
+                                        while (*nullp != '\0')
+                                        {
+                                                write(1, &(*nullp), 1);
+                                                nullp++;
+                                                count++;
+                                        }
+                                }
+                                else
+                                {
+                                        while (*pH != '\0')
+					{
+                                        write(1, &(*pH), 1);
+                                        pH++;
+                                        count++;
+					}
+                                }
 			}
 			else if (*format == '%')
 			{
@@ -53,7 +69,8 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				format++;
+				return (0);
+				/*format++;*/
 			}
 		}
 		else
