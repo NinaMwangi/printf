@@ -72,8 +72,8 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				return (0);
-				/*format++;*/
+				format++;
+				/*return (0);*/
 			}
 		}
 		else
