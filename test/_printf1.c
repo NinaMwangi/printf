@@ -49,6 +49,7 @@ int _printf(const char *format, ...)
                                                 nullp++;
                                                 count++;
                                         }
+					format++;
                                 }
                                 else
                                 {
