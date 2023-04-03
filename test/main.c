@@ -14,8 +14,8 @@ int main(void)
     unsigned int ui;
     void *addr;
 
-    len = _printf("Let's try to printf a simple sentence.\n");
-    len2 = printf("Let's try to printf a simple sentence.\n");
+    len = _printf("%");
+    len2 = printf("%");
     ui = (unsigned int)INT_MAX + 1024;
     addr = (void *)0x7ffe637541f0;
     rintf("Length:[%d, %i]\n", len, len);
@@ -43,7 +43,8 @@ int main(void)
     _printf("%s", "This sentence is retrieved from va_args!\n");
     printf("%s", "This sentence is retrieved from va_args!\n");
     printf("%d", _printf("%s", "This sentence is retrieved from va_args!\n"));*/
-    _printf(NULL);
-    printf(NULL);
+    /*_printf(NULL);
+    printf(NULL);*/
+    printf("%d\n",  printf("%"));
     return (0);
 }
