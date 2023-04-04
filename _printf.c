@@ -3,14 +3,14 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-void printAll(const char *format)
+/*void printAll(const char *format)
 {
 	while (*format != '\0')
 	{
 		write(1, &(*format), 1);
 		format++;
 	}
-}
+}*/
 
 /**
  * _printf - produces output according to a format
