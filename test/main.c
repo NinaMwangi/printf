@@ -10,14 +10,14 @@
  */
 int main(void)
 {
-    /*int len;
+    int len;
     int len2;
-    unsigned int ui;
-    void *addr;
+    /*unsigned int ui;
+    void *addr;*/
 
-    len = _printf("%");
-    len2 = printf("%");
-    ui = (unsigned int)INT_MAX + 1024;
+    len = _printf("%d\n", INT_MAX);
+    len2 = printf("%d\n", INT_MAX);
+    /*ui = (unsigned int)INT_MAX + 1024;
     addr = (void *)0x7ffe637541f0;
     rintf("Length:[%d, %i]\n", len, len);
     printf("Length:[%d, %i]\n", len2, len2);
@@ -46,7 +46,6 @@ int main(void)
     printf("%d", _printf("%s", "This sentence is retrieved from va_args!\n"));*/
     /*_printf(NULL);
     printf(NULL);*/
-    printf("%d\n", INT_MAX);
-    _printf("%i\n", 456977);
+    printf("%d\n%d\n", len, len2);
     return (0);
 }

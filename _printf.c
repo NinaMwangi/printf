@@ -7,7 +7,7 @@
  * printAll - ...
  * @format: ...
  */
-void printAll(int format, int count)
+int printAll(int format, int count)
 {
 	char toStr[20];
 	char *p;
@@ -21,6 +21,8 @@ void printAll(int format, int count)
 		p++;
 		count ++;
 	}
+
+	return (count);
 }
 
 /**
@@ -90,7 +92,7 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' || *format == 'i')
 			{
 				numb = va_arg(list, int);
-				printAll(numb, count);
+				count = printAll(numb, count);
 				format++;
 			}
 			else if (*format == '%')
