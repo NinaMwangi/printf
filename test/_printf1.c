@@ -12,27 +12,28 @@
 
 int printAll(int format, int count)
 {
-	char toStr[20];
-	char *p;
+        char toStr[20];
+        char *p;
 
-	sprintf(toStr, "%d", format);
+        sprintf(toStr, "%d", format);
 
-       	p = toStr;
-	while (*p != '\0')
-	{
-		write(1, &(*p), 1);
-		p++;
-		count ++;
-	}
+        p = toStr;
+        while (*p != '\0')
+        {
+                write(1, &(*p), 1);
+                p++;
+                count ++;
+        }
 
-	return (count);
+        return (count);
 }
 
 char* toBinary(int num) {
- 
-    char* buffer = (char*) malloc(sizeof(char) * (BITS_IN_INT + 1));
+
+    char* buffer = (char*) malloc(sizeof(char) * (BITS_IN_INT + 1)), *newBuffer;
     unsigned int mask = 1 << (BITS_IN_INT - 1);
     long unsigned int i;
+    int firstNonZero = -1, newSize;
 
     if (!buffer) {
         fprintf(stderr, "Error: could not allocate memory for binary string buffer\n");
@@ -40,14 +41,31 @@ char* toBinary(int num) {
     }
     buffer[BITS_IN_INT] = '\0';
 
-  
     for (i = 0; i < BITS_IN_INT; i++) {
         buffer[i] = (num & mask) ? '1' : '0';
-        mask >>= 1; 
+        mask >>= 1;
+        if (buffer[i] == '1' && firstNonZero == -1) {
+            firstNonZero = i;
+        }
     }
 
-    return buffer;
+    if (firstNonZero == -1) {
+        firstNonZero = BITS_IN_INT - 1;
+    }
+
+    newSize = BITS_IN_INT - firstNonZero;
+    newBuffer = (char*) realloc(buffer, sizeof(char) * (newSize + 1));
+    if (!newBuffer) {
+        fprintf(stderr, "Error: could not allocate memory for new binary string buffer\n");
+        return NULL;
+    }
+
+    newBuffer[newSize] = '\0';
+    memcpy(newBuffer, buffer + firstNonZero, newSize);
+
+    return newBuffer;
 }
+
 
 /**
  * _printf - produces output according to a format
@@ -122,7 +140,7 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'b')
 			{
-				numb1 = va_arg(list, unsigned int);
+				numb1 = va_arg(list, int);
 				temp = toBinary(numb1);
 
 				while (*temp != '\0')
