@@ -3,6 +3,15 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+void printAll(const char *format)
+{
+	while (*format != '\0')
+	{
+		write(1, &(*format), 1);
+		format++;
+	}
+}
+
 /**
  * _printf - produces output according to a format
  * @format: the string with the format specifiers
@@ -26,7 +35,11 @@ int _printf(const char *format, ...)
 	while (*format != '\0')
 	{
 
-		if (*format == '%')
+		if (*format == '%' && *(format + 1) == '\0')
+		{
+			return (-1);
+		}
+		else if (*format == '%')
 		{
 			format++;
 
@@ -72,8 +85,10 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
+				format--;
+				write(1, &(*format), 1);
 				format++;
-				return (-1);
+				count++;
 			}
 		}
 		else
@@ -83,9 +98,6 @@ int _printf(const char *format, ...)
 			count++;
 		}
 	}
-
 	va_end(list);
-	/*ch = '\n';
-	write(1, &ch, 1);*/
 	return (count);
 }

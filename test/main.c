@@ -45,6 +45,6 @@ int main(void)
     printf("%d", _printf("%s", "This sentence is retrieved from va_args!\n"));*/
     /*_printf(NULL);
     printf(NULL);*/
-    printf("%d\n",  printf("%"));
+    printf("%!\n");
     return (0);
 }
