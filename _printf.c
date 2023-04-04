@@ -3,10 +3,13 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
+#define BITS_IN_INT (sizeof(int) * 8)
+
 /**
  * printAll - ...
  * @format: ...
  */
+
 int printAll(int format, int count)
 {
 	char toStr[20];
@@ -25,6 +28,27 @@ int printAll(int format, int count)
 	return (count);
 }
 
+char* toBinary(int num) {
+ 
+    char* buffer = (char*) malloc(sizeof(char) * (BITS_IN_INT + 1));
+    unsigned int mask = 1 << (BITS_IN_INT - 1);
+    long unsigned int i;
+
+    if (!buffer) {
+        fprintf(stderr, "Error: could not allocate memory for binary string buffer\n");
+        return NULL;
+    }
+    buffer[BITS_IN_INT] = '\0';
+
+  
+    for (i = 0; i < BITS_IN_INT; i++) {
+        buffer[i] = (num & mask) ? '1' : '0';
+        mask >>= 1; 
+    }
+
+    return buffer;
+}
+
 /**
  * _printf - produces output according to a format
  * @format: the string with the format specifiers
@@ -35,8 +59,9 @@ int _printf(const char *format, ...)
 {
 	va_list list;
 	int count, numb;
-	char *pH, *nullp;
+	char *pH, *nullp, *temp;
 	char ch;
+	unsigned int numb1;
 
 	nullp = "(null)";
 	count = 0;
@@ -93,6 +118,19 @@ int _printf(const char *format, ...)
 			{
 				numb = va_arg(list, int);
 				count = printAll(numb, count);
+				format++;
+			}
+			else if (*format == 'b')
+			{
+				numb1 = va_arg(list, unsigned int);
+				temp = toBinary(numb1);
+
+				while (*temp != '\0')
+                                          {
+                                                 write(1, &(*temp), 1);
+                                                 temp++;
+                                                 count++;
+                                          }
 				format++;
 			}
 			else if (*format == '%')

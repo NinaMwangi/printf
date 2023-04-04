@@ -15,8 +15,8 @@ int main(void)
     /*unsigned int ui;
     void *addr;*/
 
-    len = _printf("%d\n", INT_MAX);
-    len2 = printf("%d\n", INT_MAX);
+    len = _printf("%b\n", UINT_MAX);
+    len2 = printf("%b\n", UINT_MAX);
     /*ui = (unsigned int)INT_MAX + 1024;
     addr = (void *)0x7ffe637541f0;
     rintf("Length:[%d, %i]\n", len, len);
