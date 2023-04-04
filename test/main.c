@@ -1,6 +1,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include "main.h"
+#include <limits.h>
 
 /**
  * main - Entry point
@@ -45,6 +46,7 @@ int main(void)
     printf("%d", _printf("%s", "This sentence is retrieved from va_args!\n"));*/
     /*_printf(NULL);
     printf(NULL);*/
-    printf("%!\n");
+    printf("%d\n", INT_MAX);
+    _printf("%i\n", 456977);
     return (0);
 }

@@ -2,13 +2,24 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
-
-void printAll(const char *format)
+#include <string.h>
+/**
+ * printAll - ...
+ * @format: ...
+ */
+void printAll(int format, int count)
 {
-	while (*format != '\0')
+	char toStr[20];
+	char *p;
+
+	sprintf(toStr, "%d", format);
+
+       	p = toStr;
+	while (*p != '\0')
 	{
-		write(1, &(*format), 1);
-		format++;
+		write(1, &(*p), 1);
+		p++;
+		count ++;
 	}
 }
 
@@ -21,7 +32,7 @@ void printAll(const char *format)
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int count;
+	int count, numb;
 	char *pH, *nullp;
 	char ch;
 
@@ -75,6 +86,12 @@ int _printf(const char *format, ...)
 
 					format++;
                                 }
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				numb = va_arg(list, int);
+				printAll(numb, count);
+				format++;
 			}
 			else if (*format == '%')
 			{
